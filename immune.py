@@ -1,6 +1,6 @@
 import torch
 import numpy as np
-from typing import List, Optional
+from typing import List, Optional, Dict, Tuple
 try:
     from transformer_lens import HookedTransformer
 except ImportError:

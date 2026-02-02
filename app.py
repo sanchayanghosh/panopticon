@@ -312,6 +312,21 @@ with col2:
     if 'drift_score' in locals():
         st.metric("Current Drift (Mahalanobis)", f"{drift_score:.2f}")
 
+    st.markdown("---")
+    st.subheader("📝 Cognitive Log")
+    if st.session_state.history:
+        # Create a clean dataframe for display
+        log_data = []
+        for h in st.session_state.history:
+            log_data.append({
+                "Prompt": h['prompt'],
+                "Class": h['class'],
+                "Drift": f"{h['drift']:.2f}",
+                "LLM Output": h.get('response', 'N/A')
+            })
+        df = pd.DataFrame(log_data[::-1]) # Reverse to show newest first
+        st.dataframe(df, use_container_width=True)
+
 # --- Footer ---
 st.markdown("---")
 st.markdown("*The Panopticon v1.0 | Self-Healing Cognitive Architecture*")
